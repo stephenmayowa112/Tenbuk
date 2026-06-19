@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { LuTruck as Truck, LuCopy as Copy, LuCheckCircle as CheckCircle, LuClock as Clock, LuArchive as Archive, LuArrowLeft as ArrowLeft, LuShieldAlert as ShieldAlert, LuSparkles as Sparkles, LuCircleAlert as AlertCircle } from 'react-icons/lu';
+import { LuTruck as Truck, LuCopy as Copy, LuCircleCheck as CheckCircle, LuClock as Clock, LuArchive as Archive, LuArrowLeft as ArrowLeft, LuShieldAlert as ShieldAlert, LuSparkles as Sparkles, LuCircleAlert as AlertCircle, LuPhone as Phone, LuFileText as FileText, LuMapPin as MapPin, LuCheck as Check } from 'react-icons/lu';
 import { Order, OrderStatus } from '../types';
 import { dbService } from '../services/db';
 
@@ -157,11 +157,11 @@ export default function OrderTracking({
                     </>
                   ) : isDisputed ? (
                     <span className="bg-rose-100 text-rose-700 font-bold text-[10px] uppercase tracking-wider px-3 py-2 rounded-xl flex items-center gap-1 border border-rose-200">
-                      ⚠️ Escrow Held on Dispute
+                      <AlertCircle className="w-4 h-4" /> Escrow Held on Dispute
                     </span>
                   ) : (
                     <span className="bg-emerald-100 text-emerald-700 font-bold text-[10px] uppercase tracking-wider px-3 py-2 rounded-xl flex items-center gap-1 border border-emerald-200">
-                      ✓ Funds Released to Vendor
+                      <CheckCircle className="w-4 h-4" /> Funds Released to Vendor
                     </span>
                   )}
                 </div>
@@ -180,7 +180,7 @@ export default function OrderTracking({
                   {/* Step 1 Placed */}
                   <div className="flex flex-col items-center gap-2">
                     <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs ring-4 ${isPlaced ? 'bg-emerald-500 text-white ring-emerald-100' : 'bg-white border border-slate-200'}`}>
-                      {isPlaced ? '✓' : '1'}
+                      {isPlaced ? <Check className="w-4 h-4" /> : '1'}
                     </div>
                     <div className="text-center font-sans space-y-0.5">
                       <p className="text-[10px] uppercase tracking-wider font-extrabold text-slate-800">Placed</p>
@@ -191,7 +191,7 @@ export default function OrderTracking({
                   {/* Step 2 Processing */}
                   <div className="flex flex-col items-center gap-2">
                     <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs ring-4 ${isProcessing ? 'bg-emerald-500 text-white ring-emerald-100' : 'bg-white border border-slate-200'}`}>
-                      {isProcessing ? '✓' : '2'}
+                      {isProcessing ? <Check className="w-4 h-4" /> : '2'}
                     </div>
                     <div className="text-center font-sans space-y-0.5">
                       <p className="text-[10px] uppercase tracking-wider font-extrabold text-slate-800 font-sans">Processing</p>
@@ -202,7 +202,7 @@ export default function OrderTracking({
                   {/* Step 3 Shipped */}
                   <div className="flex flex-col items-center gap-2">
                     <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs ring-4 ${isShipped ? 'bg-orange-500 text-white ring-orange-100' : 'bg-white border border-slate-200'}`}>
-                      {isShipped ? (isDelivered ? '✓' : '🚚') : '3'}
+                      {isShipped ? (isDelivered ? <Check className="w-4 h-4" /> : <Truck className="w-4 h-4" />) : '3'}
                     </div>
                     <div className="text-center font-sans space-y-0.5">
                       <p className="text-[10px] uppercase tracking-wider font-extrabold text-slate-800">Shipped</p>
@@ -246,7 +246,7 @@ export default function OrderTracking({
 
                 {/* Destination Red Pin */}
                 <div className="absolute right-[20%] top-[25%] text-slate-900 flex flex-col items-center">
-                  <span className="text-3xl filter drop-shadow-md animate-pulse">📍</span>
+                  <span className="filter drop-shadow-md animate-pulse text-red-500"><MapPin className="w-8 h-8 fill-red-500/20" /></span>
                   <span className="bg-white/9
 0 text-slate-800 px-2.5 py-1 rounded-lg border border-slate-100 font-sans tracking-tight text-[10px] font-bold">Buyer Node</span>
                 </div>
@@ -330,16 +330,16 @@ export default function OrderTracking({
               <button
                 id="btn-tracking-contact-support"
                 onClick={() => alert("Connecting you with SwiftLogistics dispatcher (+234-1-888-SHIP)...")}
-                className="bg-orange-500 hover:bg-orange-600 text-white font-extrabold py-3.5 rounded-xl text-xs transition-colors cursor-pointer text-center flex items-center justify-center gap-1 shadow-md shadow-orange-500/10"
+                className="bg-orange-500 hover:bg-orange-600 text-white font-extrabold py-3.5 rounded-xl text-xs transition-colors cursor-pointer text-center flex items-center justify-center gap-1.5 shadow-md shadow-orange-500/10"
               >
-                📞 Contact Support
+                <Phone className="w-4 h-4" /> Contact Support
               </button>
               <button
                 id="btn-tracking-download-invoice"
                 onClick={() => alert("Downloading PDF Invoice with Escrow hash references (SLX-TBK-FED-1823)...")}
-                className="bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 font-bold py-3.5 rounded-xl text-xs transition-colors cursor-pointer text-center active:scale-95"
+                className="bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 font-bold py-3.5 rounded-xl text-xs transition-colors cursor-pointer text-center flex items-center justify-center gap-1.5 active:scale-95"
               >
-                📄 Download Invoice
+                <FileText className="w-4 h-4" /> Download Invoice
               </button>
             </div>
           </div>

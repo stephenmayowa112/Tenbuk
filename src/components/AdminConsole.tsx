@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { LuShieldCheck as ShieldCheck, LuUserX as UserX, LuUserCheck as UserCheck, LuTriangleAlert as AlertTriangle, LuCoins as Coins, LuRefreshCw as RefreshCw, LuCheckCircle as CheckCircle, LuHelpCircle as HelpCircle } from 'react-icons/lu';
+import { LuShieldCheck as ShieldCheck, LuUserX as UserX, LuUserCheck as UserCheck, LuTriangleAlert as AlertTriangle, LuCoins as Coins, LuRefreshCw as RefreshCw, LuCircleCheck as CheckCircle, LuHelpCircle as HelpCircle, LuBriefcase as Briefcase, LuPartyPopper as PartyPopper } from 'react-icons/lu';
 import { Dispute, Vendor, Order } from '../types';
 import { dbService } from '../services/db';
 
@@ -88,7 +88,7 @@ export default function AdminConsole({
           <div className="lg:col-span-6 space-y-6">
             <div className="bg-white rounded-2xl border border-slate-100 p-6 shadow-xs space-y-4">
               <h3 className="font-extrabold text-sm text-slate-900 uppercase tracking-widest font-sans border-b border-slate-50 pb-2 flex items-center gap-1.5">
-                💼 Vendor Verifications ({vendors.length})
+                <Briefcase className="w-4 h-4 text-slate-400" /> Vendor Verifications ({vendors.length})
               </h3>
               
               <div className="space-y-4 max-h-[420px] overflow-y-auto pr-1">
@@ -132,12 +132,12 @@ export default function AdminConsole({
           <div className="lg:col-span-6 space-y-6">
             <div className="bg-white rounded-2xl border border-slate-100 p-6 shadow-xs space-y-4">
               <h3 className="font-extrabold text-sm text-slate-950 uppercase tracking-widest font-sans border-b border-slate-50 pb-2 flex items-center gap-1.5">
-                ⚠️ Escrow Arbitration & Disputes ({disputes.length})
+                <AlertTriangle className="w-4 h-4 text-orange-500" /> Escrow Arbitration & Disputes ({disputes.length})
               </h3>
 
               {disputes.length === 0 ? (
-                <div className="text-center p-12 text-slate-400 space-y-2">
-                  <span className="text-3xl">🎉</span>
+                <div className="text-center p-12 text-slate-400 flex flex-col items-center space-y-2">
+                  <PartyPopper className="w-8 h-8 text-slate-300" />
                   <p className="text-xs font-bold font-sans">Perfect compliance Score! No pending disputes.</p>
                   <p className="text-[10px] text-slate-400 font-sans">When a buyer files a dispute in the order tracking tab, it appears here instantly for mediation.</p>
                 </div>
@@ -185,8 +185,8 @@ export default function AdminConsole({
                             </button>
                           </div>
                         ) : (
-                          <div className="bg-emerald-50 text-emerald-700 text-[10px] font-bold p-2 rounded-lg text-center font-sans border border-emerald-100">
-                            ✓ Dispute Arbitrated and resolved with state: {d.status.replace('_', ' ').toUpperCase()}
+                          <div className="bg-emerald-50 text-emerald-700 text-[10px] font-bold p-2 rounded-lg justify-center flex items-center gap-1 font-sans border border-emerald-100">
+                            <CheckCircle className="w-3 h-3" /> Dispute Arbitrated and resolved with state: {d.status.replace('_', ' ').toUpperCase()}
                           </div>
                         )}
                       </div>

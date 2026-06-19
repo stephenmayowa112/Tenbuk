@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { LuShieldAlert as ShieldAlert, LuCheckCircle as CheckCircle, LuCreditCard as CreditCard, LuLandmark as Landmark, LuPhoneCall as PhoneCall, LuKey as Key, LuArrowRight as ArrowRight, LuShieldCheck as ShieldCheck, LuTrash as Trash } from 'react-icons/lu';
+import { LuShieldAlert as ShieldAlert, LuCircleCheck as CheckCircle, LuCreditCard as CreditCard, LuLandmark as Landmark, LuPhoneCall as PhoneCall, LuKey as Key, LuArrowRight as ArrowRight, LuShieldCheck as ShieldCheck, LuTrash as Trash, LuShoppingCart as ShoppingCart, LuTruck as Truck, LuShield as Shield } from 'react-icons/lu';
 import { Product, Order } from '../types';
 import { dbService } from '../services/db';
 
@@ -138,7 +138,7 @@ export default function Checkout({
             {/* Step 1 */}
             <div className="flex flex-col items-center gap-2">
               <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs ring-4 ${step === 1 ? 'bg-slate-900 text-white ring-slate-100' : 'bg-emerald-500 text-white ring-emerald-50'}`}>
-                {step > 1 ? '✓' : '1'}
+                {step > 1 ? <Check className="w-4 h-4" /> : '1'}
               </div>
               <span className="text-[10px] uppercase tracking-wider font-extrabold text-slate-500 font-mono">Shipping</span>
             </div>
@@ -163,8 +163,8 @@ export default function Checkout({
 
         {/* main Form Content */}
         {cart.length === 0 && !paySuccess ? (
-          <div className="bg-white rounded-2xl p-16 text-center border border-slate-100 max-w-lg mx-auto space-y-4 shadow-xs">
-            <span className="text-4xl">🛒</span>
+          <div className="bg-white rounded-2xl p-16 text-center border border-slate-100 max-w-lg mx-auto flex flex-col items-center space-y-4 shadow-xs">
+            <ShoppingCart className="w-10 h-10 text-slate-300 mx-auto" />
             <h3 className="text-lg font-bold text-slate-800">Your cart is currently empty</h3>
             <p className="text-sm text-slate-500">Go to the Marketplace, choose any product, and click Buy Now or Negotiated offer to test this escrow checkout!</p>
           </div>
@@ -177,7 +177,7 @@ export default function Checkout({
                 /* Phase 1: Shipping Form */
                 <form onSubmit={handleContinueToPayment} className="space-y-6">
                   <h2 className="text-lg font-bold text-slate-900 tracking-tight flex items-center gap-2 font-sans pb-3 border-b border-slate-50">
-                    🚚 Shipping Information
+                    <Truck className="w-5 h-5 text-slate-400" /> Shipping Information
                   </h2>
                   
                   <div className="grid sm:grid-cols-2 gap-4">
@@ -286,7 +286,7 @@ export default function Checkout({
                 /* Phase 2: Secure Escrow Payment Options */
                 <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-300">
                   <h2 className="text-lg font-bold text-slate-900 tracking-tight flex items-center gap-2 font-sans pb-3 border-b border-slate-50">
-                    💳 Escrow Payment Selection
+                    <CreditCard className="w-5 h-5 text-slate-400" /> Escrow Payment Selection
                   </h2>
 
                   {/* Multi Payment processors explanation */}
@@ -455,7 +455,7 @@ export default function Checkout({
                     <div className="flex-1 space-y-1">
                       <h4 className="font-bold text-xs text-slate-800 line-clamp-1 leading-snug">{item.product.title}</h4>
                       <div className="flex items-center gap-1">
-                        <span className="text-[10px] text-indigo-500 uppercase font-bold flex items-center gap-0.5">⭐ {item.product.vendorName}</span>
+                        <span className="text-[10px] text-indigo-500 uppercase font-bold flex items-center gap-1"><Shield className="w-3 h-3 fill-indigo-500/20" /> {item.product.vendorName}</span>
                       </div>
                       <div className="flex justify-between items-center text-[11px] text-slate-500 font-mono">
                         <span>Qty: {item.quantity}</span>
@@ -494,8 +494,8 @@ export default function Checkout({
                 </div>
               </div>
 
-              <div className="bg-slate-50 rounded-xl p-4 border border-slate-100 text-center text-xs text-slate-500 font-sans flex items-center justify-center gap-2">
-                <span>🛡️</span>
+              <div className="bg-slate-50 rounded-xl p-4 border border-slate-100 text-center text-xs text-slate-500 font-sans flex items-center justify-center gap-1.5">
+                <Shield className="w-4 h-4 text-emerald-500 fill-emerald-500/20" />
                 <span>BUY SMART. SECURE ESCROW.</span>
               </div>
             </div>

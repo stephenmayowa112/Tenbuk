@@ -1,6 +1,6 @@
 {
   "name": "Tenbuk Marketplace",
-  "description": "Multi-vendor e-commerce escrow platform for products, automated delivery tracking, vendor analytics dashboards, and AI negotiation bargaining.",
+  "description": "A multi-vendor e-commerce platform featuring an secure escrow payment system, AI-powered price negotiations, product comparisons, and detailed vendor analytics.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

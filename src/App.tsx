@@ -8,7 +8,7 @@ import VendorAnalytics from './components/VendorAnalytics';
 import AdminConsole from './components/AdminConsole';
 import { Product, Order, UserRole } from './types';
 import { dbService } from './services/db';
-import { LuTrash as Trash, LuShieldCheck as ShieldCheck, LuX as X } from 'react-icons/lu';
+import { LuTrash as Trash, LuShieldCheck as ShieldCheck, LuX as X, LuShoppingCart as ShoppingCart, LuHandshake as Handshake, LuScale as Scale } from 'react-icons/lu';
 
 export default function App() {
   const [currentView, setView] = useState<'marketplace' | 'details' | 'checkout' | 'track_order' | 'vendor_hub' | 'admin_console'>('marketplace');
@@ -196,7 +196,7 @@ export default function App() {
             <div className="space-y-6 flex-grow overflow-y-auto pr-1">
               <div className="flex justify-between items-center border-b pb-4">
                 <h3 className="font-black text-slate-900 uppercase text-sm font-sans flex items-center gap-1.5 pb-1">
-                  🛒 Verified Shopping Cart
+                  <ShoppingCart className="w-4 h-4" /> Verified Shopping Cart
                 </h3>
                 <button 
                   id="btn-close-cart"
@@ -208,8 +208,8 @@ export default function App() {
               </div>
 
               {cart.length === 0 ? (
-                <div className="text-center py-24 text-slate-400 space-y-4 font-sans">
-                  <span className="text-4xl text-slate-300">🛒</span>
+                <div className="text-center py-24 text-slate-400 flex flex-col items-center space-y-4 font-sans">
+                  <ShoppingCart className="w-10 h-10 text-slate-300 mx-auto" />
                   <p className="text-xs font-bold font-sans">Your shopping cart is empty</p>
                   <p className="text-[10px] text-slate-400">Discover premium items in our top deals and start a bargained deal!</p>
                 </div>
@@ -232,8 +232,8 @@ export default function App() {
                             </span>
                           </div>
                           {item.negotiatedPrice && (
-                            <span className="bg-orange-100 text-orange-700 text-[9px] font-black uppercase px-1.5 py-0.5 rounded-md inline-block mt-1">
-                              🤝 AI Price Locked
+                            <span className="bg-orange-100 text-orange-700 flex items-center gap-1 w-max text-[9px] font-black uppercase px-1.5 py-0.5 rounded-md mt-1">
+                              <Handshake className="w-3 h-3" /> AI Price Locked
                             </span>
                           )}
                         </div>
@@ -306,7 +306,7 @@ export default function App() {
             </button>
 
             <h3 className="font-black text-slate-900 text-lg uppercase tracking-wider font-sans border-b pb-3 flex items-center gap-2">
-              ⚖️ Side-By-Side Product Comparison
+              <Scale className="w-5 h-5 text-indigo-500" /> Side-By-Side Product Comparison
             </h3>
 
             <div className="grid grid-cols-2 gap-8 divide-x divide-slate-100 p-2">

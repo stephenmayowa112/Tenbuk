@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import { LuHeart as Heart, LuStar as Star, LuSlidersHorizontal as SlidersHorizontal, LuArrowRightLeft as ArrowRightLeft, LuShield as Shield, LuSparkles as Sparkles, LuSend as Send } from 'react-icons/lu';
+import { 
+  LuHeart as Heart, LuStar as Star, LuSlidersHorizontal as SlidersHorizontal, LuArrowRightLeft as ArrowRightLeft, LuShield as Shield, LuSparkles as Sparkles, LuSend as Send,
+  LuSmartphone as Smartphone, LuLaptop as Laptop, LuShirt as Shirt, LuSofa as Sofa, LuDroplets as Droplets, LuHeadphones as Headphones, LuSearch as Search, LuTruck as Truck, LuPhone as Phone, LuPartyPopper as PartyPopper
+} from 'react-icons/lu';
 import { Product } from '../types';
 
 interface BuyerHomeProps {
@@ -29,12 +32,12 @@ export default function BuyerHome({
 
   // Category list as shown in Screen 3
   const categories = [
-    { id: 'phones', name: 'Phones', icon: '📱' },
-    { id: 'computers', name: 'Computers', icon: '💻' },
-    { id: 'fashion', name: 'Fashion', icon: '🧥' },
-    { id: 'home_living', name: 'Home & Living', icon: '🛋️' },
-    { id: 'beauty', name: 'Beauty', icon: '🧴' },
-    { id: 'electronics', name: 'Electronics', icon: '⚙️' },
+    { id: 'phones', name: 'Phones', icon: <Smartphone className="w-8 h-8" /> },
+    { id: 'computers', name: 'Computers', icon: <Laptop className="w-8 h-8" /> },
+    { id: 'fashion', name: 'Fashion', icon: <Shirt className="w-8 h-8" /> },
+    { id: 'home_living', name: 'Home & Living', icon: <Sofa className="w-8 h-8" /> },
+    { id: 'beauty', name: 'Beauty', icon: <Droplets className="w-8 h-8" /> },
+    { id: 'electronics', name: 'Electronics', icon: <Headphones className="w-8 h-8" /> },
   ];
 
   // Helper function to format prices cleanly based on currency
@@ -162,8 +165,8 @@ export default function BuyerHome({
         </div>
 
         {filteredProducts.length === 0 ? (
-          <div className="bg-white rounded-2xl p-16 text-center border border-slate-100 max-w-lg mx-auto space-y-4">
-            <span className="text-4xl text-slate-300">🔍</span>
+          <div className="bg-white rounded-2xl p-16 text-center border border-slate-100 max-w-lg mx-auto flex flex-col items-center space-y-4">
+            <Search className="w-10 h-10 text-slate-300 mx-auto" />
             <h3 className="text-lg font-bold text-slate-700">No products match your criteria</h3>
             <p className="text-sm text-slate-400">Try modifying your search or select a different category filter.</p>
             <button
@@ -234,8 +237,8 @@ export default function BuyerHome({
                   <div className="p-5 flex-1 flex flex-col justify-between">
                     <div className="space-y-2">
                       <div className="flex items-center gap-1.5 text-[10px] text-slate-400 font-mono">
-                        <span className="text-emerald-500 font-bold flex items-center gap-0.5">
-                          🛡️ {p.vendorName}
+                        <span className="text-emerald-500 font-bold flex items-center gap-1.5">
+                          <Shield className="w-4 h-4 fill-emerald-500/20" /> {p.vendorName}
                         </span>
                       </div>
 
@@ -320,18 +323,18 @@ export default function BuyerHome({
 
             {/* Quick Benefits icons strip */}
             <div className="grid grid-cols-3 gap-4 py-6 border-y border-white/5 text-slate-300 max-w-lg mx-auto text-center">
-              <div className="space-y-1">
-                <span className="text-lg bg-emerald-500/10 p-2 rounded-full inline-block">🛡️</span>
+              <div className="space-y-1 flex flex-col items-center">
+                <span className="text-emerald-500 bg-emerald-500/10 p-2.5 rounded-full inline-block mb-1"><Shield className="w-5 h-5 fill-emerald-500/20" /></span>
                 <p className="text-[10px] font-black uppercase text-emerald-400 tracking-wider">Escrow Payment</p>
                 <p className="text-[9px] text-slate-500">100% Secure held funds</p>
               </div>
-              <div className="space-y-1">
-                <span className="text-lg bg-orange-500/10 p-2 rounded-full inline-block">🚚</span>
+              <div className="space-y-1 flex flex-col items-center">
+                <span className="text-orange-500 bg-orange-500/10 p-2.5 rounded-full inline-block mb-1"><Truck className="w-5 h-5" /></span>
                 <p className="text-[10px] font-black uppercase text-orange-400 tracking-wider">Fast Delivery</p>
                 <p className="text-[9px] text-slate-500">Nationwide courier</p>
               </div>
-              <div className="space-y-1">
-                <span className="text-lg bg-sky-500/10 p-2 rounded-full inline-block">📞</span>
+              <div className="space-y-1 flex flex-col items-center">
+                <span className="text-sky-500 bg-sky-500/10 p-2.5 rounded-full inline-block mb-1"><Phone className="w-5 h-5 fill-sky-500/20" /></span>
                 <p className="text-[10px] font-black uppercase text-sky-400 tracking-wider font-sans">24/7 Support</p>
                 <p className="text-[9px] text-slate-500">Always here to help</p>
               </div>
@@ -359,8 +362,8 @@ export default function BuyerHome({
             </form>
 
             {successEmail && (
-              <div className="p-3 bg-emerald-500/10 text-emerald-400 text-xs rounded-xl font-bold border border-emerald-500/20 max-w-sm mx-auto animate-in fade-in duration-200">
-                🎉 Subscribed successfully with {successEmail}! Welcome to Tenbuk!
+              <div className="p-3 bg-emerald-500/10 flex items-center justify-center gap-2 text-emerald-400 text-xs rounded-xl font-bold border border-emerald-500/20 max-w-sm mx-auto animate-in fade-in duration-200">
+                <PartyPopper className="w-4 h-4" /> Subscribed successfully with {successEmail}! Welcome to Tenbuk!
               </div>
             )}
           </div>

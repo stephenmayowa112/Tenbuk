@@ -219,7 +219,7 @@ export default function VendorAnalytics({
                     <p className="text-xs font-bold text-slate-400 uppercase tracking-wider font-mono">Your Storefront</p>
                     <p className="text-sm font-black text-emerald-600 font-sans">Elite Seller Status</p>
                   </div>
-                  <span className="p-2 bg-emerald-50 rounded-xl text-emerald-500 text-xs font-bold font-sans">✓ Verified</span>
+                  <span className="p-2 bg-emerald-50 rounded-xl text-emerald-500 text-xs font-bold font-sans flex items-center gap-1"><Check className="w-3 h-3" /> Verified</span>
                 </div>
                 <div className="space-y-1.5">
                   <div className="flex justify-between text-xs font-black text-slate-700">
@@ -243,8 +243,8 @@ export default function VendorAnalytics({
                     <TrendingUp className="w-5 h-5" />
                   </div>
                 </div>
-                <p className="text-[10px] text-emerald-600 font-extrabold flex items-center gap-0.5">
-                  📈 +12% vs last month
+                <p className="text-[10px] text-emerald-600 font-extrabold flex items-center gap-1">
+                  <TrendingUp className="w-3 h-3 text-emerald-500" /> +12% vs last month
                 </p>
               </div>
 
@@ -373,8 +373,8 @@ export default function VendorAnalytics({
             {/* CRUD form slide down */}
             {showAddForm && (
               <form onSubmit={handleSaveProduct} className="bg-white rounded-2xl border border-slate-100 p-6 space-y-4 shadow-md max-w-2xl">
-                <h3 className="font-black text-sm text-slate-900 uppercase tracking-widest font-sans border-b border-slate-50 pb-2">
-                  {editingProduct ? '📝 Edit Platform Product' : '➕ Post New Marketplace Product'}
+                <h3 className="font-black text-sm text-slate-900 uppercase tracking-widest font-sans border-b border-slate-50 pb-2 flex items-center gap-1.5">
+                  {editingProduct ? <><Edit2 className="w-4 h-4 text-slate-400" /> Edit Platform Product</> : <><Plus className="w-4 h-4 text-slate-400" /> Post New Marketplace Product</>}
                 </h3>
                 
                 <div className="grid sm:grid-cols-2 gap-4">

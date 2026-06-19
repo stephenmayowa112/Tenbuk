@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { LuStar as Star, LuShield as Shield, LuArrowLeft as ArrowLeft, LuShoppingCart as ShoppingCart, LuSparkles as Sparkles, LuSend as Send, LuCheck as Check, LuX as X, LuArrowRightLeft as ArrowRightLeft } from 'react-icons/lu';
+import { LuStar as Star, LuShield as Shield, LuArrowLeft as ArrowLeft, LuShoppingCart as ShoppingCart, LuSparkles as Sparkles, LuSend as Send, LuCheck as Check, LuX as X, LuArrowRightLeft as ArrowRightLeft, LuBot as Bot, LuTruck as Truck } from 'react-icons/lu';
 import { Product, ChatMessage } from '../types';
 import { dbService } from '../services/db';
 
@@ -185,8 +185,8 @@ export default function ProductDetails({
                 referrerPolicy="no-referrer"
                 className="max-h-[380px] object-contain"
               />
-              <span className="absolute top-4 left-4 bg-orange-100 text-orange-600 font-black text-[10px] uppercase tracking-wider px-2.5 py-1.5 rounded-lg flex items-center gap-1 shadow-xs font-sans">
-                ⭐ {product.rating} Rating
+              <span className="absolute top-4 left-4 bg-orange-100 text-orange-600 font-black text-[10px] uppercase tracking-wider px-2.5 py-1.5 rounded-lg flex items-center gap-1.5 shadow-xs font-sans">
+                <Star className="w-3.5 h-3.5 fill-orange-500" /> {product.rating} Rating
               </span>
             </div>
 
@@ -216,14 +216,14 @@ export default function ProductDetails({
                 <div className="border border-slate-50 rounded-xl p-4 bg-slate-50/50 flex justify-between items-center text-xs">
                   <div>
                     <p className="font-bold text-slate-800">AudioGalaxy Seller</p>
-                    <p className="text-slate-400 font-mono">Rating: ⭐ 4.8</p>
+                    <p className="text-slate-400 font-mono flex items-center gap-1">Rating: <Star className="w-3 h-3 fill-orange-400 text-orange-400" /> 4.8</p>
                   </div>
                   <span className="font-extrabold text-slate-900">{formatValue(252.00)}</span>
                 </div>
                 <div className="border border-slate-50 rounded-xl p-4 bg-slate-50/50 flex justify-between items-center text-xs">
                   <div>
                     <p className="font-bold text-slate-800">TechBargains Hub</p>
-                    <p className="text-slate-400 font-mono">Rating: ⭐ 4.5</p>
+                    <p className="text-slate-400 font-mono flex items-center gap-1">Rating: <Star className="w-3 h-3 fill-orange-400 text-orange-400" /> 4.5</p>
                   </div>
                   <span className="font-extrabold text-slate-900">{formatValue(248.50)}</span>
                 </div>
@@ -237,7 +237,7 @@ export default function ProductDetails({
               <div className="space-y-3">
                 <div className="flex items-center gap-2">
                   <span className="bg-emerald-100 text-emerald-700 text-[10px] font-bold px-2 py-1 rounded-sm uppercase flex items-center gap-0.5">
-                    🛡️ Verified Vendor
+                    <span className="flex items-center gap-1.5"><Shield className="w-4 h-4 fill-emerald-500/20 text-emerald-500" /> Verified Vendor</span>
                   </span>
                   <span className="text-xs text-slate-400 font-mono">{product.vendorName}</span>
                 </div>
@@ -270,7 +270,7 @@ export default function ProductDetails({
                     </span>
                   </div>
                   <span className="text-[10px] text-emerald-600 font-semibold uppercase block pt-1.5">
-                    🟢 In Stock &bull; Fast Delivery
+                    <span className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 bg-green-500 rounded-full" /> In Stock &bull; Fast Delivery</span>
                   </span>
                 </div>
                 {bargainPrice && (
@@ -369,7 +369,7 @@ export default function ProductDetails({
         {/* Header bar matching Screen 5 overlay */}
         <div className="bg-slate-900 text-white px-5 py-4 flex items-center justify-between font-sans">
           <div className="flex items-center gap-2">
-            <span className="bg-orange-500 p-1 rounded-md text-white animate-pulse">🤖</span>
+            <span className="bg-orange-500 p-1 rounded-md text-white animate-pulse"><Bot className="w-4 h-4" /></span>
             <div>
               <p className="text-xs font-black tracking-tight flex items-center gap-1">
                 TENBUK AI Bargain
@@ -471,7 +471,7 @@ export default function ProductDetails({
 
           {negotiating && (
             <div className="flex items-center gap-1 text-[10px] text-slate-400 bg-white border border-slate-100 p-2 rounded-xl w-32 font-sans animate-pulse">
-              <span>🤖 Agent thinking...</span>
+              <span className="flex items-center gap-1.5"><Bot className="w-4 h-4" /> Agent thinking...</span>
             </div>
           )}
           <div ref={messagesEndRef} />

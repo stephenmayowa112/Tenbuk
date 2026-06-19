@@ -1,5 +1,6 @@
 {
-  "name": "react-example",
+  "name": "tenbuk-marketplace",
+  "description": "A multi-vendor e-commerce platform featuring an escrow payment system, AI-powered price negotiations, product comparisons, and detailed vendor analytics.",
   "private": true,
   "version": "1.0.0",
   "type": "module",

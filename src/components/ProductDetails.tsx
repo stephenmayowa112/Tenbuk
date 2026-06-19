@@ -141,7 +141,7 @@ export default function ProductDetails({
         throw new Error('Negotiation endpoint failed');
       }
     } catch (err) {
-      console.error(err);
+      console.warn(err);
       // Static offline fallback
       const aiMsg: ChatMessage = {
         id: `msg-ai-err-${Date.now()}`,

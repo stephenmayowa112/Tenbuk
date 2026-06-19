@@ -21,7 +21,7 @@ try {
   auth = getAuth(app);
   console.log("Firebase App, Auth, and custom Firestore database initialized successfully!");
 } catch (error) {
-  console.error("Firebase failed to initialize cleanly. Falling back to local state engine.", error);
+  console.warn("Firebase failed to initialize cleanly. Falling back to local state engine.", error);
 }
 
 export { app, db, auth };

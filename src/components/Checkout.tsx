@@ -99,7 +99,7 @@ export default function Checkout({
       try {
         await dbService.createOrder(newOrder);
       } catch (err) {
-        console.error(err);
+        console.warn(err);
       }
 
       setProcessingPayment(false);

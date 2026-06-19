@@ -58,7 +58,7 @@ export default function OrderTracking({
       setOrder(updated);
       alert(`Success! Delivery confirmed. Your funds of ${formatValue(order.total)} have been safely released to the vendor, and the escrow ledger has been closed.`);
     } catch (err) {
-      console.error(err);
+      console.warn(err);
     }
   };
 
@@ -83,7 +83,7 @@ export default function OrderTracking({
       setDisputeReason('');
       alert("Escrow funds have been successfully locked and flagged. An admin has been notified in the moderation queue to evaluate and resolve this dispute.");
     } catch (err) {
-      console.error(err);
+      console.warn(err);
     }
   };
 

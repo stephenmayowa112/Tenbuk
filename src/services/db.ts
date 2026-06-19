@@ -341,7 +341,7 @@ function writeLocal<T>(key: string, data: T[]): void {
   try {
     localStorage.setItem(`tenbuk_${key}`, JSON.stringify(data));
   } catch (e) {
-    console.error(e);
+    console.warn(e);
   }
 }
 
@@ -367,7 +367,7 @@ export const dbService = {
           return DEFAULT_PRODUCTS;
         }
       } catch (error) {
-        console.error("Firestore getProducts failed, falling back to local storage:", error);
+        console.warn("Firestore getProducts failed, falling back to local storage:", error);
       }
     }
     return readLocal<Product>('products', DEFAULT_PRODUCTS);
@@ -379,7 +379,7 @@ export const dbService = {
         const { id, ...data } = product;
         await setDoc(doc(db, 'products', id), data);
       } catch (error) {
-        console.error("Firestore saveProduct error:", error);
+        console.warn("Firestore saveProduct error:", error);
       }
     }
     const current = readLocal<Product>('products', DEFAULT_PRODUCTS);
@@ -419,7 +419,7 @@ export const dbService = {
           return DEFAULT_ORDERS;
         }
       } catch (error) {
-        console.error("Firestore getOrders failed, falling back to local storage:", error);
+        console.warn("Firestore getOrders failed, falling back to local storage:", error);
       }
     }
     return readLocal<Order>('orders', DEFAULT_ORDERS);
@@ -431,7 +431,7 @@ export const dbService = {
         const { id, ...data } = order;
         await setDoc(doc(db, 'orders', id), data);
       } catch (error) {
-        console.error("Firestore createOrder error:", error);
+        console.warn("Firestore createOrder error:", error);
       }
     }
     const current = readLocal<Order>('orders', DEFAULT_ORDERS);
@@ -446,7 +446,7 @@ export const dbService = {
         if (escrowStatus) updates.escrowStatus = escrowStatus;
         await updateDoc(doc(db, 'orders', orderId), updates);
       } catch (error) {
-        console.error("Firestore updateOrderStatus error:", error);
+        console.warn("Firestore updateOrderStatus error:", error);
       }
     }
     const current = readLocal<Order>('orders', DEFAULT_ORDERS);
@@ -477,7 +477,7 @@ export const dbService = {
           return DEFAULT_VENDORS;
         }
       } catch (error) {
-        console.error(error);
+        console.warn(error);
       }
     }
     return readLocal<Vendor>('vendors', DEFAULT_VENDORS);
@@ -488,7 +488,7 @@ export const dbService = {
       try {
         await updateDoc(doc(db, 'vendors', vendorId), { verified });
       } catch (error) {
-        console.error(error);
+        console.warn(error);
       }
     }
     const current = readLocal<Vendor>('vendors', DEFAULT_VENDORS);
@@ -513,7 +513,7 @@ export const dbService = {
           return list.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
         }
       } catch (error) {
-        console.error(error);
+        console.warn(error);
       }
     }
     const current = readLocal<ChatMessage>('chat_messages', DEFAULT_CHAT_MESSAGES);
@@ -526,7 +526,7 @@ export const dbService = {
         const { id, ...data } = msg;
         await setDoc(doc(db, 'chat_messages', id), data);
       } catch (error) {
-        console.error(error);
+        console.warn(error);
       }
     }
     const current = readLocal<ChatMessage>('chat_messages', DEFAULT_CHAT_MESSAGES);
@@ -539,7 +539,7 @@ export const dbService = {
       try {
         await updateDoc(doc(db, 'chat_messages', msgId), { status });
       } catch (error) {
-        console.error(error);
+        console.warn(error);
       }
     }
     const current = readLocal<ChatMessage>('chat_messages', DEFAULT_CHAT_MESSAGES);
@@ -563,7 +563,7 @@ export const dbService = {
           return list;
         }
       } catch (error) {
-        console.error(error);
+        console.warn(error);
       }
     }
     return readLocal<Dispute>('disputes', DEFAULT_DISPUTES);
@@ -575,7 +575,7 @@ export const dbService = {
         const { id, ...data } = dispute;
         await setDoc(doc(db, 'disputes', id), data);
       } catch (error) {
-        console.error(error);
+        console.warn(error);
       }
     }
     const current = readLocal<Dispute>('disputes', DEFAULT_DISPUTES);
@@ -594,7 +594,7 @@ export const dbService = {
           resolvedBy: 'admin-1'
         });
       } catch (error) {
-        console.error(error);
+        console.warn(error);
       }
     }
     const current = readLocal<Dispute>('disputes', DEFAULT_DISPUTES);

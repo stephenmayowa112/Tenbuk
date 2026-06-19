@@ -135,99 +135,75 @@ export default function VendorAnalytics({
   };
 
   return (
-    <div className="font-sans flex bg-[#f8fafc]/50 min-h-screen">
-      
-      {/* Sidebar Navigation matching Screen 2 */}
-      <aside className="w-64 bg-slate-900 border-r border-slate-800 text-slate-400 p-6 flex flex-col justify-between hidden md:flex flex-shrink-0">
-        <div className="space-y-8">
-          {/* Elite Seller user details header */}
-          <div className="space-y-4 text-center pb-6 border-b border-white/5">
-            <div className="w-16 h-16 rounded-full bg-slate-800 border-2 border-orange-500 mx-auto flex items-center justify-center p-1 overflow-hidden">
-              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200" alt="Vendor owner avatar" referrerPolicy="no-referrer" className="object-cover rounded-full h-full w-full" />
+    <div className="font-sans text-slate-800 bg-[#f8fafc]/40 py-8 min-h-screen">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        
+        {/* Header summary and Horizontal Navigation Tabs */}
+        <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-xs space-y-6">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div className="flex items-center gap-4">
+              <div className="w-16 h-16 rounded-full bg-slate-800 border-2 border-orange-500 flex items-center justify-center p-1 overflow-hidden shrink-0">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200" alt="Vendor owner avatar" referrerPolicy="no-referrer" className="object-cover rounded-full h-full w-full" />
+              </div>
+              <div>
+                <h1 className="text-2xl font-black text-slate-900 tracking-tight font-sans">
+                  Vendor Hub
+                </h1>
+                <p className="text-[10px] text-orange-500 font-extrabold uppercase tracking-widest font-mono">Elite Seller Status</p>
+              </div>
             </div>
-            <div>
-              <p className="font-sans font-black text-white text-sm">Vendor Hub</p>
-              <p className="text-[10px] text-orange-400 font-extrabold uppercase tracking-widest font-mono">Elite Seller Status</p>
+            <div className="flex items-center gap-3">
+              <button
+                id="btn-vendor-post-product"
+                onClick={() => { setActiveTab('inventory'); setShowAddForm(true); setEditingProduct(null); }}
+                className="bg-orange-500 hover:bg-orange-600 text-white font-extrabold px-5 py-2.5 rounded-xl text-xs flex items-center justify-center gap-1 cursor-pointer transition-all active:scale-[0.98] shadow-md shadow-orange-500/10"
+              >
+                <Plus className="w-4 h-4" />
+                Post New Product
+              </button>
+              <button 
+                onClick={loadVendorData}
+                className="p-2.5 border border-slate-200 hover:bg-slate-50 transition-colors rounded-xl text-slate-600 text-xs font-bold font-sans cursor-pointer flex items-center justify-center bg-white shadow-xs"
+                title="Refresh database node"
+              >
+                <RefreshCw className="w-4 h-4" />
+              </button>
             </div>
           </div>
 
-          <button
-            id="btn-vendor-post-product-sidebar"
-            onClick={() => { setActiveTab('inventory'); setShowAddForm(true); setEditingProduct(null); }}
-            className="w-full bg-orange-500 hover:bg-orange-600 text-white font-extrabold py-3 rounded-xl text-xs flex items-center justify-center gap-1 cursor-pointer transition-all active:scale-[0.98] shadow-md shadow-orange-500/10"
-          >
-            <Plus className="w-4 h-4" />
-            Post New Product
-          </button>
-
-          {/* Nav links */}
-          <nav className="space-y-2 text-xs font-bold uppercase tracking-wider">
+          {/* Horizontal Nav links */}
+          <nav className="flex gap-2 overflow-x-auto pb-1">
             <button
-              id="sidebar-tab-db"
+              id="tab-db"
               onClick={() => { setActiveTab('dashboard'); setShowAddForm(false); }}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl cursor-pointer ${
-                activeTab === 'dashboard' ? 'bg-orange-500 text-white shadow-xs' : 'hover:bg-white/5 hover:text-white'
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider cursor-pointer whitespace-nowrap transition-colors ${
+                activeTab === 'dashboard' ? 'bg-orange-50 text-orange-600 border border-orange-100' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
               }`}
             >
-              <Activity className="w-4.5 h-4.5" />
-              <span>Dashboard</span>
+              <Activity className="w-4 h-4" />
+              Dashboard
             </button>
             <button
-              id="sidebar-tab-inv"
+              id="tab-inv"
               onClick={() => { setActiveTab('inventory'); setShowAddForm(false); }}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl cursor-pointer ${
-                activeTab === 'inventory' ? 'bg-orange-500 text-white shadow-xs' : 'hover:bg-white/5 hover:text-white'
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider cursor-pointer whitespace-nowrap transition-colors ${
+                activeTab === 'inventory' ? 'bg-orange-50 text-orange-600 border border-orange-100' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
               }`}
             >
-              <Package className="w-4.5 h-4.5" />
-              <span>Inventory</span>
+              <Package className="w-4 h-4" />
+              Inventory
             </button>
             <button
-              id="sidebar-tab-orders"
+              id="tab-orders"
               onClick={() => { setActiveTab('orders'); setShowAddForm(false); }}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl cursor-pointer ${
-                activeTab === 'orders' ? 'bg-orange-500 text-white shadow-xs' : 'hover:bg-white/5 hover:text-white'
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider cursor-pointer whitespace-nowrap transition-colors ${
+                activeTab === 'orders' ? 'bg-orange-50 text-orange-600 border border-orange-100' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
               }`}
             >
-              <Inbox className="w-4.5 h-4.5" />
-              <span>Orders Queue</span>
+              <Inbox className="w-4 h-4" />
+              Orders Queue
             </button>
           </nav>
-        </div>
-
-        <div className="space-y-4 pt-6 border-t border-white/5 text-xs font-semibold">
-          <button onClick={() => alert("Vendor manual, escrow dispute forms, and swiftlogistics parcel drop codes can be obtained at support@tenbuk.com")} className="flex items-center gap-2 hover:text-white w-full text-left cursor-pointer">
-            <HelpCircle className="w-4 h-4" />
-            <span>Support Docs</span>
-          </button>
-          <button onClick={() => alert("Vendor Hub session signing out.")} className="flex items-center gap-2 hover:text-white w-full text-left cursor-pointer">
-            <LogOut className="w-4 h-4" />
-            <span>Sign Out</span>
-          </button>
-        </div>
-      </aside>
-
-      {/* Main Vendor Content Dashboard */}
-      <main className="flex-1 p-6 md:p-8 lg:p-10 space-y-8 overflow-x-hidden">
-        
-        {/* Header summary */}
-        <div className="flex justify-between items-center bg-white p-6 rounded-2xl border border-slate-100 shadow-xs">
-          <div>
-            <h1 className="text-2xl font-black text-slate-900 tracking-tight font-sans">
-              Vendor Analytics
-            </h1>
-            <p className="text-xs text-slate-400 font-sans">
-              Track your sales trends, customer behavior, and catalog inventories.
-            </p>
-          </div>
-          <button 
-            onClick={loadVendorData}
-            className="p-2 border border-slate-200 hover:bg-slate-50 transition-colors rounded-xl text-slate-600 text-xs font-bold font-sans cursor-pointer flex items-center gap-1.5"
-            title="Refresh database node"
-          >
-            <RefreshCw className="w-3.5 h-3.5" />
-            Refresh
-          </button>
         </div>
 
         {/* Dynamic view segments */}
@@ -570,7 +546,7 @@ export default function VendorAnalytics({
           </div>
         )}
 
-      </main>
+      </div>
     </div>
   );
 }

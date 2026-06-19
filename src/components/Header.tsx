@@ -34,59 +34,6 @@ export default function Header({
 
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-gray-100 font-sans shadow-xs">
-      {/* Workspace Switcher Bar - Helpful for testing and navigation */}
-      <div className="bg-slate-900 border-b border-slate-800 text-slate-300 text-xs px-4 py-2 flex flex-col md:flex-row items-center justify-between gap-2">
-        <div className="flex items-center gap-1.5 text-orange-500 font-semibold tracking-tight">
-          <ShieldCheck className="w-4.5 h-4.5" />
-          <span>TENBUK escrow ecosystem demo</span>
-        </div>
-        <div className="flex items-center gap-1.5 flex-wrap justify-center">
-          <span className="text-[10px] text-slate-500 font-mono">WORKSPACE TOURS:</span>
-          <button 
-            id="ws-tour-buyer"
-            onClick={() => { setView('marketplace'); setRole('buyer'); }} 
-            className={`px-2 py-0.5 rounded text-[11px] font-medium transition-colors cursor-pointer ${currentView === 'marketplace' ? 'bg-orange-600 text-white' : 'hover:bg-slate-800 text-slate-400'}`}
-          >
-            🛒 Marketplace Home
-          </button>
-          <button 
-            id="ws-tour-details"
-            onClick={() => { setView('details'); setRole('buyer'); }} 
-            className={`px-2 py-0.5 rounded text-[11px] font-medium transition-colors cursor-pointer ${currentView === 'details' ? 'bg-orange-600 text-white' : 'hover:bg-slate-800 text-slate-400'}`}
-          >
-            🎧 Details & AI Bargain
-          </button>
-          <button 
-            id="ws-tour-checkout"
-            onClick={() => { setView('checkout'); setRole('buyer'); }} 
-            className={`px-2 py-0.5 rounded text-[11px] font-medium transition-colors cursor-pointer ${currentView === 'checkout' ? 'bg-orange-600 text-white' : 'hover:bg-slate-800 text-slate-400'}`}
-          >
-            🚚 Shipping & Escrow (Checkout)
-          </button>
-          <button 
-            id="ws-tour-track"
-            onClick={() => { setView('track_order'); setRole('buyer'); }} 
-            className={`px-2 py-0.5 rounded text-[11px] font-medium transition-colors cursor-pointer ${currentView === 'track_order' ? 'bg-orange-600 text-white' : 'hover:bg-slate-800 text-slate-400'}`}
-          >
-            📦 Track Order (#TBK-8924-M)
-          </button>
-          <button 
-            id="ws-tour-vendor"
-            onClick={() => { setView('vendor_hub'); setRole('vendor'); }} 
-            className={`px-2 py-0.5 rounded text-[11px] font-medium transition-colors cursor-pointer ${currentView === 'vendor_hub' ? 'bg-orange-600 text-white' : 'hover:bg-slate-800 text-slate-400'}`}
-          >
-            📊 Vendor Analytics Hub
-          </button>
-          <button 
-            id="ws-tour-admin"
-            onClick={() => { setView('admin_console'); setRole('admin'); }} 
-            className={`px-2 py-0.5 rounded text-[11px] font-medium transition-colors cursor-pointer ${currentView === 'admin_console' ? 'bg-orange-600 text-white' : 'hover:bg-slate-800 text-slate-400'}`}
-          >
-            🛡️ Admin Queue & Disputes
-          </button>
-        </div>
-      </div>
-
       {/* Main Header Row */}
       <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
         {/* Logo matching Screen 3 styling */}
@@ -117,18 +64,11 @@ export default function Header({
             Deals
           </button>
           <button 
-            id="nav-vendors"
-            onClick={() => { setView('admin_console'); }} 
-            className="hover:text-orange-600 transition-colors cursor-pointer"
-          >
-            Vendors
-          </button>
-          <button 
-            id="nav-help"
+            id="nav-orders"
             onClick={() => setView('track_order')} 
-            className="hover:text-orange-600 transition-colors cursor-pointer"
+            className={`hover:text-orange-600 transition-colors cursor-pointer pb-1 ${currentView === 'track_order' ? 'text-orange-600 border-b-2 border-orange-600' : ''}`}
           >
-            Help
+            Orders
           </button>
         </nav>
 

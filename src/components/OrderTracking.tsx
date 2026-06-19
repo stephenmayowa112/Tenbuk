@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Truck, Copy, CheckCircle, Clock, Archive, ArrowLeft, ShieldAlert, Sparkles, AlertCircle } from 'lucide-react';
+import { LuTruck as Truck, LuCopy as Copy, LuCheckCircle as CheckCircle, LuClock as Clock, LuArchive as Archive, LuArrowLeft as ArrowLeft, LuShieldAlert as ShieldAlert, LuSparkles as Sparkles, LuCircleAlert as AlertCircle } from 'react-icons/lu';
 import { Order, OrderStatus } from '../types';
 import { dbService } from '../services/db';
 

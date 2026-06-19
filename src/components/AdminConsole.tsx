@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ShieldCheck, UserX, UserCheck, AlertTriangle, Coins, RefreshCw, CheckCircle, HelpCircle } from 'lucide-react';
+import { LuShieldCheck as ShieldCheck, LuUserX as UserX, LuUserCheck as UserCheck, LuTriangleAlert as AlertTriangle, LuCoins as Coins, LuRefreshCw as RefreshCw, LuCheckCircle as CheckCircle, LuHelpCircle as HelpCircle } from 'react-icons/lu';
 import { Dispute, Vendor, Order } from '../types';
 import { dbService } from '../services/db';
 

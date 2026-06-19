@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Heart, Star, SlidersHorizontal, ArrowRightLeft, Shield, Sparkles, Send } from 'lucide-react';
+import { LuHeart as Heart, LuStar as Star, LuSlidersHorizontal as SlidersHorizontal, LuArrowRightLeft as ArrowRightLeft, LuShield as Shield, LuSparkles as Sparkles, LuSend as Send } from 'react-icons/lu';
 import { Product } from '../types';
 
 interface BuyerHomeProps {

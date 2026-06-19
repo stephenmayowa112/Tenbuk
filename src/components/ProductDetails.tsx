@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Star, Shield, ArrowLeft, ShoppingCart, Sparkles, Send, Check, X, ArrowRightLeft } from 'lucide-react';
+import { LuStar as Star, LuShield as Shield, LuArrowLeft as ArrowLeft, LuShoppingCart as ShoppingCart, LuSparkles as Sparkles, LuSend as Send, LuCheck as Check, LuX as X, LuArrowRightLeft as ArrowRightLeft } from 'react-icons/lu';
 import { Product, ChatMessage } from '../types';
 import { dbService } from '../services/db';
 
@@ -191,13 +191,13 @@ export default function ProductDetails({
             </div>
 
             {/* Thumbnail selector */}
-            <div className="flex gap-4">
+            <div className="flex gap-3 overflow-x-auto pb-2 snap-x">
               {product.images.map((img, index) => (
                 <button
                   id={`btn-thumb-select-${index}`}
                   key={index}
                   onClick={() => setActiveImage(img)}
-                  className={`w-24 h-24 rounded-2xl bg-white border p-3 flex items-center justify-center overflow-hidden transition-all cursor-pointer ${
+                  className={`w-20 h-20 sm:w-24 sm:h-24 shrink-0 rounded-2xl bg-white border p-3 flex items-center justify-center overflow-hidden transition-all cursor-pointer snap-start ${
                     activeImage === img ? 'border-orange-500 ring-2 ring-orange-100' : 'border-slate-100 hover:border-slate-200'
                   }`}
                 >

@@ -3,9 +3,9 @@ import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer 
 } from 'recharts';
 import { 
-  TrendingUp, Activity, Inbox, Package, Grid, AlertTriangle, 
-  Settings, HelpCircle, LogOut, Plus, Search, Edit2, Trash2, Check, RefreshCw 
-} from 'lucide-react';
+  LuTrendingUp as TrendingUp, LuActivity as Activity, LuInbox as Inbox, LuPackage as Package, LuGrid as Grid, LuTriangleAlert as AlertTriangle, 
+  LuSettings as Settings, LuHelpCircle as HelpCircle, LuLogOut as LogOut, LuPlus as Plus, LuSearch as Search, LuPencil as Edit2, LuTrash2 as Trash2, LuCheck as Check, LuRefreshCw as RefreshCw 
+} from 'react-icons/lu';
 import { Product, Order, Vendor, OrderStatus, EscrowStatus } from '../types';
 import { dbService } from '../services/db';
 
@@ -324,7 +324,7 @@ export default function VendorAnalytics({
               </div>
 
               <div className="overflow-x-auto">
-                <table className="w-full text-left border-collapse text-xs">
+                <table className="w-full text-left border-collapse text-xs whitespace-nowrap">
                   <thead>
                     <tr className="bg-slate-50/50 text-slate-400 uppercase tracking-wider font-extrabold font-mono border-b border-slate-100">
                       <th className="p-4 pl-6">Order ID</th>

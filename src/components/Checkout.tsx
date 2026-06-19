@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShieldAlert, CheckCircle, CreditCard, Landmark, PhoneCall, Key, ArrowRight, ShieldCheck, Trash } from 'lucide-react';
+import { LuShieldAlert as ShieldAlert, LuCheckCircle as CheckCircle, LuCreditCard as CreditCard, LuLandmark as Landmark, LuPhoneCall as PhoneCall, LuKey as Key, LuArrowRight as ArrowRight, LuShieldCheck as ShieldCheck, LuTrash as Trash } from 'react-icons/lu';
 import { Product, Order } from '../types';
 import { dbService } from '../services/db';
 

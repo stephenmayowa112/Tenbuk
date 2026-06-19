@@ -8,7 +8,7 @@ import VendorAnalytics from './components/VendorAnalytics';
 import AdminConsole from './components/AdminConsole';
 import { Product, Order, UserRole } from './types';
 import { dbService } from './services/db';
-import { Trash, ShieldCheck, X } from 'lucide-react';
+import { LuTrash as Trash, LuShieldCheck as ShieldCheck, LuX as X } from 'react-icons/lu';
 
 export default function App() {
   const [currentView, setView] = useState<'marketplace' | 'details' | 'checkout' | 'track_order' | 'vendor_hub' | 'admin_console'>('marketplace');

@@ -262,11 +262,9 @@ export default function ProductDetails({
                 <div>
                   <span className="text-xs text-slate-400 block pb-1">Special Escrow Price</span>
                   <div className="flex items-baseline gap-2">
-                    <span className="text-2xl font-black text-orange-600">
-                      {formatValue(product.price)}
-                    </span>
-                    <span className="text-sm text-slate-300 line-through">
-                      {formatValue(product.price * 1.2)}
+                    <span className="text-2xl font-black text-orange-600 flex items-center gap-2">
+                      <span>${product.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                      <span className="text-lg text-slate-500 font-mono font-medium">/ ₦{product.priceNGN ? product.priceNGN.toLocaleString() : (product.price * 1500).toLocaleString()}</span>
                     </span>
                   </div>
                   <span className="text-[10px] text-emerald-600 font-semibold uppercase block pt-1.5">
@@ -280,6 +278,26 @@ export default function ProductDetails({
                   </div>
                 )}
               </div>
+
+              {product.sizes && product.sizes.length > 0 && (
+                <div className="pt-2">
+                  <div className="flex justify-between items-center pb-2">
+                    <span className="text-xs font-bold text-slate-700 uppercase tracking-wider">Available Sizes</span>
+                    {product.measurementChartUrl && (
+                      <a href={product.measurementChartUrl} target="_blank" rel="noreferrer" className="text-[10px] text-indigo-500 font-bold hover:underline cursor-pointer flex items-center gap-1">
+                        View Measurement Chart
+                      </a>
+                    )}
+                  </div>
+                  <div className="flex gap-2 flex-wrap">
+                    {product.sizes.map(size => (
+                      <button key={size} className="px-4 py-2 text-xs font-bold font-mono border border-slate-200 rounded-lg text-slate-600 hover:border-orange-500 hover:text-orange-500 bg-white">
+                        {size}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {/* Description Tab selectors */}
               <div className="border-b border-slate-100 flex gap-4 text-xs font-semibold uppercase tracking-wider">

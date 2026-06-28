@@ -33,11 +33,29 @@ export default function VendorAnalytics({
   // Form Fields
   const [pTitle, setPTitle] = useState('');
   const [pPrice, setPPrice] = useState(100);
+  const [pPriceNGN, setPPriceNGN] = useState(150000);
   const [pFloor, setPFloor] = useState(80);
+  const [pFloorNGN, setPFloorNGN] = useState(120000);
   const [pStock, setPStock] = useState(10);
   const [pCategory, setPCategory] = useState('electronics');
   const [pDesc, setPDesc] = useState('');
   const [pImg, setPImg] = useState('');
+  const [pSizes, setPSizes] = useState('');
+  const [pMeasurementChart, setPMeasurementChart] = useState('');
+
+  // Handle file uploads by reading as DataURL (base64)
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>, setter: (val: string) => void) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        if (typeof reader.result === 'string') {
+          setter(reader.result);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   // Sample Recharts historical analytics matching Screen 2 line points
   const trendsData = [
@@ -68,11 +86,15 @@ export default function VendorAnalytics({
     setEditingProduct(p);
     setPTitle(p.title);
     setPPrice(p.price);
+    setPPriceNGN(p.priceNGN || p.price * 1500);
     setPFloor(p.priceFloor || Math.round(p.price * 0.8));
+    setPFloorNGN(p.priceFloorNGN || (p.priceFloor || Math.round(p.price * 0.8)) * 1500);
     setPStock(p.stockQty);
     setPCategory(p.categoryId);
     setPDesc(p.description);
     setPImg(p.images[0]);
+    setPSizes(p.sizes ? p.sizes.join(', ') : '');
+    setPMeasurementChart(p.measurementChartUrl || '');
     setShowAddForm(true);
   };
 
@@ -87,6 +109,7 @@ export default function VendorAnalytics({
       title: pTitle,
       description: pDesc || `High quality premium ${pTitle} ready for immediate processing and secure escrow delivery.`,
       price: Number(pPrice),
+      priceNGN: Number(pPriceNGN),
       currency: 'USD',
       stockQty: Number(pStock),
       images: [pImg || 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=600'],
@@ -94,6 +117,9 @@ export default function VendorAnalytics({
       rating: editingProduct ? editingProduct.rating : 5.0,
       reviewsCount: editingProduct ? editingProduct.reviewsCount : 1,
       priceFloor: Number(pFloor),
+      priceFloorNGN: Number(pFloorNGN),
+      sizes: pSizes.trim() ? pSizes.split(',').map(s => s.trim()) : undefined,
+      measurementChartUrl: pMeasurementChart || undefined,
     };
 
     await dbService.saveProduct(newProd);
@@ -105,6 +131,8 @@ export default function VendorAnalytics({
     setPTitle('');
     setPDesc('');
     setPImg('');
+    setPSizes('');
+    setPMeasurementChart('');
     loadVendorData();
     alert("Success! Product catalog updated and synchronized to our e-commerce marketplace node.");
   };
@@ -394,14 +422,25 @@ export default function VendorAnalytics({
                   </div>
                 </div>
 
-                <div className="grid sm:grid-cols-3 gap-4">
+                <div className="grid sm:grid-cols-2 gap-4">
                   <div className="space-y-1">
                     <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Default Retail Price (USD)</label>
                     <input type="number" required min={1} value={pPrice} onChange={(e) => setPPrice(Number(e.target.value))} className="w-full text-xs p-3 border rounded-xl" />
                   </div>
                   <div className="space-y-1">
+                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Retail Price (Local/NGN)</label>
+                    <input type="number" required min={1} value={pPriceNGN} onChange={(e) => setPPriceNGN(Number(e.target.value))} className="w-full text-xs p-3 border rounded-xl" />
+                  </div>
+                </div>
+
+                <div className="grid sm:grid-cols-3 gap-4">
+                  <div className="space-y-1">
                     <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Bargain Floor Price (USD)</label>
                     <input type="number" required min={1} value={pFloor} onChange={(e) => setPFloor(Number(e.target.value))} className="w-full text-xs p-3 border rounded-xl text-orange-600 font-bold" />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Floor Price (Local/NGN)</label>
+                    <input type="number" required min={1} value={pFloorNGN} onChange={(e) => setPFloorNGN(Number(e.target.value))} className="w-full text-xs p-3 border rounded-xl text-orange-600 font-bold" />
                   </div>
                   <div className="space-y-1">
                     <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Stock Quantity</label>
@@ -409,15 +448,40 @@ export default function VendorAnalytics({
                   </div>
                 </div>
 
+                {pCategory === 'fashion' && (
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div className="space-y-1">
+                      <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Sizes (comma separated)</label>
+                      <input type="text" value={pSizes} onChange={(e) => setPSizes(e.target.value)} placeholder="e.g. S, M, L, XL or 40, 41, 42" className="w-full text-xs p-3 border rounded-xl" />
+                    </div>
+                    <div className="space-y-1">
+                      <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Measurement Chart (Image/File)</label>
+                      <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, setPMeasurementChart)} className="w-full text-xs p-2.5 border rounded-xl bg-slate-50" />
+                      {pMeasurementChart && <p className="text-[9px] text-emerald-500 font-bold">Chart uploaded ✓</p>}
+                    </div>
+                  </div>
+                )}
+
                 <div className="space-y-1">
                   <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Feature Description</label>
                   <textarea rows={3} value={pDesc} onChange={(e) => setPDesc(e.target.value)} placeholder="Premium features of product catalog..." className="w-full text-xs p-3 border rounded-xl" />
                 </div>
 
-                <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Unsplash image URL / asset link</label>
-                  <input type="text" value={pImg} onChange={(e) => setPImg(e.target.value)} placeholder="https://images.unsplash.com/..." className="w-full text-xs p-3 border rounded-xl" />
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Upload Product Image (Camera/File)</label>
+                    <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, setPImg)} className="w-full text-xs p-2.5 border rounded-xl bg-slate-50" />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Or Image URL</label>
+                    <input type="text" value={pImg} onChange={(e) => setPImg(e.target.value)} placeholder="https://..." className="w-full text-xs p-3 border rounded-xl" />
+                  </div>
                 </div>
+                {pImg && (
+                  <div className="mt-2">
+                    <img src={pImg} alt="Preview" className="h-20 w-20 object-cover rounded-xl border border-slate-200" />
+                  </div>
+                )}
 
                 <div className="flex gap-2 justify-end">
                   <button type="button" onClick={() => { setShowAddForm(false); setEditingProduct(null); }} className="bg-slate-100 font-bold text-slate-700 px-4 py-2.5 rounded-lg text-xs cursor-pointer">Cancel</button>

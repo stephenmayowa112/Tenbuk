@@ -36,7 +36,8 @@ export interface Product {
   categoryId: string;
   title: string;
   description: string;
-  price: number; // Stored in USD or default NGN (we will handle display conversions)
+  price: number; // Stored in USD
+  priceNGN?: number; // Optional explicitly set local currency price
   currency: 'USD' | 'NGN';
   stockQty: number;
   images: string[];
@@ -44,7 +45,10 @@ export interface Product {
   rating: number;
   reviewsCount: number;
   priceFloor?: number; // Minimum acceptable price for automatic AI negotiations
+  priceFloorNGN?: number; // Minimum acceptable price in NGN
   brand?: string;
+  sizes?: string[]; // E.g., ['S', 'M', 'L', 'XL'] or ['40', '41', '42']
+  measurementChartUrl?: string;
 }
 
 export type EscrowStatus = 'held' | 'released' | 'disputed';

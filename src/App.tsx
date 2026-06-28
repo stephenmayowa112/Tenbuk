@@ -131,6 +131,7 @@ export default function App() {
             onOpenCompare={handleOpenCompare}
             searchQuery={searchQuery}
             onClearSearch={() => setSearchQuery('')}
+            setView={setView}
           />
         )}
 

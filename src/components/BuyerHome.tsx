@@ -139,10 +139,10 @@ export default function BuyerHome({
 
             <div className="absolute right-0 top-0 bottom-0 flex justify-end items-center pr-2 md:pr-12 pointer-events-none w-[55%]">
               <img
-                src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=600"
-                alt="Nike Red Sneaker Offer"
+                src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=600"
+                alt="Zenith ANC Headphones"
                 referrerPolicy="no-referrer"
-                className="w-full h-auto max-h-[135px] md:max-h-[300px] object-contain object-right drop-shadow-2xl z-10 scale-[1.35] origin-right"
+                className="w-full h-auto max-h-[135px] md:max-h-[300px] object-contain object-right drop-shadow-2xl z-10 scale-[1.35] origin-right mix-blend-multiply"
               />
             </div>
 

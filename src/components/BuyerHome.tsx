@@ -12,7 +12,9 @@ import {
   LuShirt as Shirt,
   LuSofa as Sofa,
   LuDroplets as Droplets,
-  LuHeadphones as Headphones,
+  LuMonitor as Monitor,
+  LuShoppingBasket as ShoppingBasket,
+  LuLamp as Lamp,
   LuSearch as Search,
   LuTruck as Truck,
   LuPhone as Phone,
@@ -65,24 +67,14 @@ export default function BuyerHome({
 
   // Category list as shown in Screen 3
   const categories = [
-    { id: "phones", name: "Phones", icon: <Smartphone className="w-8 h-8" /> },
-    {
-      id: "computers",
-      name: "Computers",
-      icon: <Laptop className="w-8 h-8" />,
-    },
-    { id: "fashion", name: "Fashion", icon: <Shirt className="w-8 h-8" /> },
-    {
-      id: "home_living",
-      name: "Home & Living",
-      icon: <Sofa className="w-8 h-8" />,
-    },
-    { id: "beauty", name: "Beauty", icon: <Droplets className="w-8 h-8" /> },
-    {
-      id: "electronics",
-      name: "Electronics",
-      icon: <Headphones className="w-8 h-8" />,
-    },
+    { id: "phones", name: "Phones", icon: <Smartphone className="w-8 h-8 text-blue-500" /> },
+    { id: "computers", name: "Computers", icon: <Laptop className="w-8 h-8 text-slate-700" /> },
+    { id: "fashion", name: "Fashion", icon: <Shirt className="w-8 h-8 text-orange-500" /> },
+    { id: "home_living", name: "Home & Living", icon: <Lamp className="w-8 h-8 text-amber-500" /> },
+    { id: "beauty", name: "Beauty", icon: <Sparkles className="w-8 h-8 text-rose-500" /> },
+    { id: "electronics", name: "Electronics", icon: <Monitor className="w-8 h-8 text-blue-400" /> },
+    { id: "groceries", name: "Groceries", icon: <ShoppingBasket className="w-8 h-8 text-emerald-500" /> },
+    { id: "watches", name: "Watches", icon: <Watch className="w-8 h-8 text-amber-600" /> },
   ];
 
   // Helper function to format prices cleanly based on currency
@@ -124,48 +116,48 @@ export default function BuyerHome({
   return (
     <div className="font-sans text-slate-800 bg-[#f8f6f2] min-h-screen pb-20 md:pb-0">
       {/* The blue background extension for mobile */}
-      <div className="bg-[#1e2f4f] rounded-b-[40px] pt-2 pb-24 px-4 -mb-20 md:-mb-28 shadow-sm relative z-0">
-        {/* Keep this empty, it just provides the background */}
-      </div>
+      <div className="bg-[#1e2f4f] pb-8 md:pb-12 rounded-b-[32px] md:rounded-b-[48px] pt-1">
+        {/* Hero Banner matching Screen 3 */}
+        <section className="max-w-7xl mx-auto px-4 relative z-10">
+          <div className="bg-gradient-to-br from-[#fdf9f4] to-[#f4f0ea] rounded-[24px] md:rounded-[32px] overflow-hidden relative shadow-[0_15px_35px_rgba(0,0,0,0.15)] flex flex-col justify-center min-h-[170px] md:min-h-[340px]">
+            <div className="relative z-10 flex flex-col justify-center pl-4 py-6 pr-2 md:pl-12 md:py-12 w-[65%]">
+              <h1 className="text-[20px] sm:text-[24px] md:text-5xl font-black text-[#1e2f4f] tracking-tight leading-[1.1] mb-3">
+                Hot Deals &<br /> Big Savings!
+              </h1>
+              <div
+                className="flex w-max cursor-pointer mt-1 md:mt-2 overflow-hidden rounded-r-full -ml-4 md:-ml-12 shadow-md hover:opacity-90 transition-opacity"
+                onClick={() => onSelectProduct("prod-zenith-anc")}
+              >
+                <div className="bg-[#f0a651] text-[#fffdfa] pl-6 pr-2 py-1.5 md:pl-12 md:pr-4 md:py-3 flex items-center justify-center">
+                  <span className="text-[11px] md:text-sm font-bold">₦18,500</span>
+                </div>
+                <div className="bg-orange-500 text-white px-3 py-1.5 md:px-6 md:py-3 flex items-center justify-center">
+                  <span className="text-[14px] md:text-xl font-black">₦12,000</span>
+                </div>
+              </div>
+            </div>
 
-      {/* Hero Banner matching Screen 3 */}
-      <section className="max-w-7xl mx-auto px-4 relative z-10 mt-2 md:mt-4">
-        <div className="bg-[#fcfaf8] rounded-[24px] md:rounded-[32px] overflow-hidden relative shadow-lg shadow-black/10 flex flex-col justify-center min-h-[160px] md:min-h-[340px]">
-          <div className="relative z-10 flex flex-col justify-center pl-4 py-6 pr-2 md:pl-12 md:py-12 w-[65%]">
-            <h1 className="text-[20px] sm:text-[24px] md:text-5xl font-black text-[#1e2f4f] tracking-tight leading-[1.1] mb-3">
-              Hot Deals &<br /> Big Savings!
-            </h1>
-            <div
-              className="bg-gradient-to-r from-orange-400 to-orange-500 text-white rounded-r-[12px] flex items-center pl-4 pr-3 py-1.5 md:pl-12 md:pr-5 md:py-2 w-max shadow-md cursor-pointer hover:bg-orange-600 transition-colors -ml-4 md:-ml-12 mt-1 md:mt-2"
-              onClick={() => onSelectProduct("prod-zenith-anc")}
-            >
-              <span className="text-[11px] md:text-sm font-bold text-white/70 line-through mr-1.5 md:mr-2">
-                ₦18,500
-              </span>
-              <span className="text-[14px] md:text-xl font-black">₦12,000</span>
+            <div className="absolute right-0 top-0 bottom-0 flex justify-end items-center pr-2 md:pr-12 pointer-events-none w-[55%]">
+              <img
+                src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=600"
+                alt="Nike Red Sneaker Offer"
+                referrerPolicy="no-referrer"
+                className="w-full h-auto max-h-[135px] md:max-h-[300px] object-contain object-right drop-shadow-2xl z-10 scale-[1.35] origin-right"
+              />
+            </div>
+
+            {/* Pagination dots at bottom center */}
+            <div className="absolute bottom-2 md:bottom-4 left-0 right-0 flex justify-center gap-1.5 z-20">
+              <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-orange-500"></div>
+              <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-slate-300"></div>
+              <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-slate-300"></div>
             </div>
           </div>
-
-          <div className="absolute right-0 top-0 bottom-0 flex justify-end items-center pr-2 md:pr-12 pointer-events-none w-[55%]">
-            <img
-              src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=600"
-              alt="Nike Red Sneaker Offer"
-              referrerPolicy="no-referrer"
-              className="w-full h-auto max-h-[140px] md:max-h-[300px] object-contain object-right drop-shadow-2xl z-10 scale-[1.35] origin-right"
-            />
-          </div>
-
-          {/* Pagination dots at bottom center */}
-          <div className="absolute bottom-2 md:bottom-4 left-0 right-0 flex justify-center gap-1.5 z-20">
-            <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-orange-500"></div>
-            <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-slate-300"></div>
-            <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-slate-300"></div>
-          </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
       {/* Explore Categories matching Screen 3 icons strip */}
-      <section className="max-w-7xl mx-auto px-4 py-8 md:py-12 relative z-10">
+      <section id="categories-section" className="max-w-7xl mx-auto px-4 py-8 md:py-12 relative z-10">
         <h2 className="hidden md:block text-xl font-bold tracking-tight text-slate-900 font-sans mb-6">
           Explore Categories
         </h2>
@@ -367,7 +359,7 @@ export default function BuyerHome({
       </section>
 
       {/* Mobile Bottom Navigation Bar */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-[#fdfaf7] border-t border-slate-100/50 flex items-center justify-between px-2 pb-safe pt-2 shadow-[0_-10px_20px_rgba(0,0,0,0.03)] z-50 rounded-t-[20px]">
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-[#fdfaf7] border-t border-slate-100/50 flex items-center justify-between px-2 pb-safe pt-2 shadow-[0_-10px_20px_rgba(0,0,0,0.03)] z-50">
         <div
           onClick={() => setView && setView("marketplace")}
           className="flex flex-col items-center gap-1 p-2 w-[20%] text-[#1e2f4f] cursor-pointer"
@@ -375,18 +367,27 @@ export default function BuyerHome({
           <Home className="w-[24px] h-[24px] fill-current" />
           <span className="text-[11px] font-bold">Home</span>
         </div>
-        <div className="flex flex-col items-center gap-1 p-2 w-[20%] text-slate-400 hover:text-[#1e2f4f] cursor-pointer">
-          <Wallet className="w-[24px] h-[24px]" />
+        <div 
+          onClick={() => {
+             const cats = document.getElementById("categories-section");
+             if (cats) cats.scrollIntoView({ behavior: "smooth" });
+          }}
+          className="flex flex-col items-center gap-1 p-2 w-[20%] text-slate-400 hover:text-[#1e2f4f] cursor-pointer"
+        >
+          <LayoutGrid className="w-[24px] h-[24px]" />
           <span className="text-[11px] font-medium">Categories</span>
         </div>
         <div
-          onClick={() => setView && setView("dashboard")}
+          onClick={() => setView && setView("checkout")}
           className="flex flex-col items-center gap-1 p-2 w-[20%] text-slate-400 hover:text-[#1e2f4f] cursor-pointer relative"
         >
           <ShoppingCart className="w-[24px] h-[24px]" />
-          <span className="text-[11px] font-medium">Profile</span>
+          <span className="text-[11px] font-medium">Cart</span>
         </div>
-        <div className="flex flex-col items-center gap-1 p-2 w-[20%] text-slate-400 hover:text-[#1e2f4f] cursor-pointer">
+        <div 
+          onClick={() => setView && setView("dashboard")}
+          className="flex flex-col items-center gap-1 p-2 w-[20%] text-slate-400 hover:text-[#1e2f4f] cursor-pointer"
+        >
           <Bell className="w-[24px] h-[24px]" />
           <span className="text-[11px] font-medium text-center leading-tight">
             Notifications
@@ -398,12 +399,12 @@ export default function BuyerHome({
         >
           <div className="flex flex-col gap-[3px] mt-1 mb-[5px]">
             <div className="flex gap-[3px]">
-              <div className="w-[6px] h-[6px] bg-orange-400 rounded-sm"></div>
-              <div className="w-[6px] h-[6px] bg-orange-400 rounded-sm"></div>
+              <div className="w-[6px] h-[6px] bg-slate-400 rounded-sm"></div>
+              <div className="w-[6px] h-[6px] bg-slate-400 rounded-sm"></div>
             </div>
             <div className="flex gap-[3px]">
-              <div className="w-[6px] h-[6px] bg-orange-400 rounded-sm"></div>
-              <div className="w-[6px] h-[6px] bg-orange-400 rounded-sm"></div>
+              <div className="w-[6px] h-[6px] bg-slate-400 rounded-sm"></div>
+              <div className="w-[6px] h-[6px] bg-slate-400 rounded-sm"></div>
             </div>
           </div>
           <span className="text-[11px] font-medium">More</span>

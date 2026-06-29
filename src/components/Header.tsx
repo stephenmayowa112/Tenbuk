@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { LuSearch as Search, LuShoppingCart as ShoppingCart, LuUser as User, LuShieldCheck as ShieldCheck, LuHelpCircle as HelpCircle, LuStore as Store, LuX as X, LuInfo as Info, LuMenu as Menu, LuMic as Mic } from 'react-icons/lu';
+import { LuSearch as Search, LuShoppingCart as ShoppingCart, LuUser as User, LuShieldCheck as ShieldCheck, LuCircleHelp as HelpCircle, LuStore as Store, LuX as X, LuInfo as Info, LuMenu as Menu, LuMic as Mic } from 'react-icons/lu';
 import { Product } from '../types';
 
 interface HeaderProps {
@@ -28,6 +28,7 @@ export default function Header({
   setSearchQuery,
 }: HeaderProps) {
   const [showRoleDropdown, setShowRoleDropdown] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
   const cartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
 
   const displayCurrencySymbol = currency === 'USD' ? '$' : '₦';
@@ -39,7 +40,10 @@ export default function Header({
         <div className="flex items-center justify-between gap-4">
           
           <div className="flex items-center gap-3">
-            <button className="md:hidden p-1 text-white hover:text-orange-400 transition-colors">
+            <button 
+              className="md:hidden p-1 text-white hover:text-orange-400 transition-colors cursor-pointer"
+              onClick={() => setShowMobileMenu(true)}
+            >
               <Menu className="w-6 h-6" />
             </button>
             {/* Logo matching Screen 3 styling */}
@@ -193,6 +197,116 @@ export default function Header({
           </div>
         </div>
       </div>
+      {/* Mobile Menu Overlay */}
+      {showMobileMenu && (
+        <div className="fixed inset-0 z-[100] md:hidden">
+          {/* Backdrop */}
+          <div 
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
+            onClick={() => setShowMobileMenu(false)}
+          ></div>
+          
+          {/* Menu Drawer */}
+          <div className="fixed inset-y-0 left-0 w-4/5 max-w-sm bg-white shadow-2xl flex flex-col animate-in slide-in-from-left duration-300">
+            {/* Header */}
+            <div className="px-4 py-5 border-b border-slate-100 flex items-center justify-between bg-[#1e2f4f]">
+              <div className="flex items-center gap-1.5 shrink-0">
+                <span className="text-xl font-black font-sans tracking-tight text-white flex items-center italic">
+                  TEN<span className="text-orange-500 relative">BUK
+                    <svg className="absolute -top-1.5 -right-2 w-3 h-3 text-orange-500 fill-current" viewBox="0 0 24 24"><path d="M12 2L22 12l-1.41 1.41L13 5.83v16.17h-2V5.83L3.41 13.41 2 12 12 2z" transform="rotate(45 12 12)"/></svg>
+                  </span>
+                </span>
+              </div>
+              <button 
+                onClick={() => setShowMobileMenu(false)}
+                className="p-2 text-white hover:text-orange-400 hover:bg-white/10 rounded-full transition-colors cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Content */}
+            <div className="flex-1 overflow-y-auto py-4 px-3 flex flex-col gap-6 text-slate-800">
+              {/* Main Links */}
+              <div className="flex flex-col gap-1">
+                <button 
+                  onClick={() => { setView('marketplace'); setShowMobileMenu(false); }} 
+                  className={`flex items-center gap-3 px-3 py-3 rounded-xl transition-colors cursor-pointer ${currentView === 'marketplace' ? 'bg-orange-50 text-orange-600 font-bold' : 'hover:bg-slate-50 font-medium'}`}
+                >
+                  <Store className="w-5 h-5" />
+                  Marketplace
+                </button>
+                <button 
+                  onClick={() => { setView('track_order'); setShowMobileMenu(false); }} 
+                  className={`flex items-center gap-3 px-3 py-3 rounded-xl transition-colors cursor-pointer ${currentView === 'track_order' ? 'bg-orange-50 text-orange-600 font-bold' : 'hover:bg-slate-50 font-medium'}`}
+                >
+                  <ShoppingCart className="w-5 h-5" />
+                  Orders
+                </button>
+              </div>
+
+              {/* Currency Toggle */}
+              <div className="flex flex-col gap-2 px-3">
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Currency</span>
+                <div className="flex bg-slate-100 p-1 rounded-lg">
+                  <button 
+                    onClick={() => { setCurrency('USD'); setShowMobileMenu(false); }}
+                    className={`flex-1 py-2 text-sm font-bold rounded-md transition-colors cursor-pointer ${currency === 'USD' ? 'bg-white shadow-sm text-[#1e2f4f]' : 'text-slate-500 hover:text-slate-700'}`}
+                  >
+                    USD ($)
+                  </button>
+                  <button 
+                    onClick={() => { setCurrency('NGN'); setShowMobileMenu(false); }}
+                    className={`flex-1 py-2 text-sm font-bold rounded-md transition-colors cursor-pointer ${currency === 'NGN' ? 'bg-white shadow-sm text-[#1e2f4f]' : 'text-slate-500 hover:text-slate-700'}`}
+                  >
+                    NGN (₦)
+                  </button>
+                </div>
+              </div>
+
+              {/* Roles */}
+              <div className="flex flex-col gap-2 px-3">
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Workspace Role</span>
+                <div className="flex flex-col gap-1">
+                  <button
+                    onClick={() => { setRole('buyer'); setView('marketplace'); setShowMobileMenu(false); }}
+                    className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors cursor-pointer ${role === 'buyer' ? 'bg-slate-800 text-white font-bold' : 'bg-slate-50 text-slate-600 hover:bg-slate-100'}`}
+                  >
+                    <User className="w-4 h-4" />
+                    Buyer
+                  </button>
+                  <button
+                    onClick={() => { setRole('vendor'); setView('vendor_hub'); setShowMobileMenu(false); }}
+                    className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors cursor-pointer ${role === 'vendor' ? 'bg-slate-800 text-white font-bold' : 'bg-slate-50 text-slate-600 hover:bg-slate-100'}`}
+                  >
+                    <Store className="w-4 h-4" />
+                    Vendor
+                  </button>
+                  <button
+                    onClick={() => { setRole('admin'); setView('admin_console'); setShowMobileMenu(false); }}
+                    className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors cursor-pointer ${role === 'admin' ? 'bg-slate-800 text-white font-bold' : 'bg-slate-50 text-slate-600 hover:bg-slate-100'}`}
+                  >
+                    <ShieldCheck className="w-4 h-4" />
+                    Admin
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Footer */}
+            <div className="p-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400 font-medium">
+              <button className="flex items-center gap-1.5 hover:text-slate-600 cursor-pointer">
+                <HelpCircle className="w-4 h-4" />
+                Support
+              </button>
+              <button className="flex items-center gap-1.5 hover:text-slate-600 cursor-pointer">
+                <Info className="w-4 h-4" />
+                About
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 }
